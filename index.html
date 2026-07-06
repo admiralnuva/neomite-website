@@ -3,962 +3,471 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Neomite | Practical software for small business workflows</title>
-  <meta name="description" content="Neomite builds practical software for small business teams handling complex documents and financial reconciliation without large ERP systems or internal IT teams." />
+  <title>Neomite Labs — AI tools for small businesses</title>
+  <meta name="description" content="Neomite Labs builds focused AI tools that give small businesses capabilities previously reserved for large enterprises." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
       --ink: #101827;
       --muted: #667085;
       --line: #e7edf2;
       --soft: #f8fbfc;
-      --soft-2: #f2f9f8;
       --teal: #00a99d;
       --teal-dark: #027f78;
       --violet: #7557ff;
       --violet-soft: #efeaff;
-      --card: rgba(255, 255, 255, 0.82);
-      --shadow: 0 24px 70px rgba(16, 24, 40, 0.10);
-      --small-shadow: 0 16px 45px rgba(16, 24, 40, 0.08);
-      --radius: 28px;
+      --radius: 16px;
+      --shadow: 0 24px 70px rgba(16,24,40,0.10);
     }
 
-    * { box-sizing: border-box; }
-
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
 
     body {
-      margin: 0;
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-family: 'Inter', system-ui, sans-serif;
       color: var(--ink);
       background:
-        radial-gradient(circle at 18% 8%, rgba(0,169,157,.12), transparent 34%),
-        radial-gradient(circle at 92% 5%, rgba(117,87,255,.13), transparent 32%),
-        linear-gradient(180deg, #ffffff 0%, #fbfefe 44%, #ffffff 100%);
-      letter-spacing: -0.02em;
+        radial-gradient(circle at 15% 8%, rgba(0,169,157,.10), transparent 32%),
+        radial-gradient(circle at 90% 6%, rgba(117,87,255,.11), transparent 30%),
+        linear-gradient(180deg, #ffffff 0%, #fbfefe 50%, #ffffff 100%);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
     }
 
     a { color: inherit; text-decoration: none; }
+    .page { max-width: 1100px; margin: 0 auto; padding: 0 32px; }
 
-    .page {
-      max-width: 1180px;
-      margin: 0 auto;
-      padding: 0 24px;
-    }
-
+    /* NAV */
     .nav {
-      position: sticky;
-      top: 0;
-      z-index: 20;
+      position: sticky; top: 0; z-index: 20;
       backdrop-filter: blur(18px);
-      background: rgba(255,255,255,.78);
-      border-bottom: 1px solid rgba(231,237,242,.74);
+      background: rgba(255,255,255,.82);
+      border-bottom: 1px solid rgba(231,237,242,.80);
     }
-
     .nav-inner {
-      max-width: 1180px;
-      margin: 0 auto;
-      padding: 22px 24px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
+      max-width: 1100px; margin: 0 auto;
+      padding: 20px 32px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .brand {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-weight: 700; font-size: 20px; color: #0f172a; letter-spacing: -0.3px;
+    }
+    .brand svg { width: 32px; height: 32px; }
+    .brand-sub { font-size: 13px; font-weight: 500; color: #94a3b8; margin-left: 4px; letter-spacing: 0; }
+    .nav-links { display: flex; align-items: center; gap: 32px; font-size: 14px; color: #475569; font-weight: 500; }
+    .nav-links a:hover { color: var(--teal-dark); }
+    .nav-cta {
+      height: 38px; padding: 0 20px;
+      background: linear-gradient(135deg, var(--teal), var(--violet));
+      color: #fff; border: none; border-radius: 10px;
+      font-size: 14px; font-weight: 600; cursor: pointer;
+      font-family: inherit; display: inline-flex; align-items: center;
     }
 
-    .brand {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      font-weight: 760;
-      font-size: 23px;
+    /* HERO */
+    .hero {
+      padding: 88px 32px 80px;
+      max-width: 1100px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 64px; align-items: center;
+    }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 7px;
+      font-size: 11px; font-weight: 600; letter-spacing: 0.09em;
+      text-transform: uppercase; color: var(--teal-dark);
+      margin-bottom: 20px;
+    }
+    .hero-eyebrow-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--teal); }
+    .hero h1 {
+      font-size: clamp(38px, 5vw, 56px);
+      font-weight: 700; line-height: 1.08;
+      letter-spacing: -0.05em; margin-bottom: 20px;
       color: #0f172a;
     }
-
-    .brand svg { width: 36px; height: 36px; }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 34px;
-      font-size: 14px;
-      color: #334155;
-      font-weight: 560;
+    .hero h1 span {
+      background: linear-gradient(135deg, var(--teal), var(--violet));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-sub { font-size: 17px; color: #475569; line-height: 1.75; margin-bottom: 32px; max-width: 480px; }
+    .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn-primary {
+      height: 48px; padding: 0 28px;
+      background: linear-gradient(135deg, var(--teal), var(--violet));
+      color: #fff; border: none; border-radius: 10px;
+      font-size: 15px; font-weight: 600; cursor: pointer;
+      font-family: inherit; display: inline-flex; align-items: center;
+      box-shadow: 0 8px 24px rgba(0,169,157,.25);
+    }
+    .btn-secondary {
+      height: 48px; padding: 0 24px;
+      background: rgba(255,255,255,.80); color: var(--ink);
+      border: 1px solid rgba(0,169,157,.25); border-radius: 10px;
+      font-size: 15px; font-weight: 500; cursor: pointer;
+      font-family: inherit; display: inline-flex; align-items: center;
+      box-shadow: 0 4px 12px rgba(16,24,40,.06);
     }
 
-    .nav-links a:hover { color: var(--teal-dark); }
-
-    .hero {
-      padding: 84px 0 76px;
-      display: grid;
-      grid-template-columns: 1fr 0.92fr;
-      gap: 60px;
-      align-items: center;
-    }
-
-    .eyebrow {
-      text-transform: uppercase;
-      color: var(--teal-dark);
-      font-weight: 760;
-      letter-spacing: .18em;
-      font-size: 12px;
-      margin-bottom: 22px;
-    }
-
-    h1 {
-      margin: 0;
-      font-size: clamp(46px, 6.4vw, 76px);
-      line-height: .97;
-      letter-spacing: -0.065em;
-      max-width: 690px;
-    }
-
-    .lead {
-      margin: 26px 0 0;
-      color: #475467;
-      font-size: 20px;
-      line-height: 1.55;
-      max-width: 590px;
-      letter-spacing: -0.025em;
-    }
-
-    .actions {
-      display: flex;
-      gap: 14px;
-      margin-top: 34px;
-      flex-wrap: wrap;
-    }
-
-    .button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 52px;
-      padding: 0 23px;
-      border-radius: 14px;
-      font-weight: 700;
-      font-size: 15px;
-      border: 1px solid transparent;
-      transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
-    }
-
-    .button:hover { transform: translateY(-2px); }
-
-    .primary {
-      color: white;
-      background: linear-gradient(135deg, var(--teal), #03b8aa 48%, var(--violet));
-      box-shadow: 0 18px 40px rgba(0,169,157,.25);
-    }
-
-    .secondary {
-      color: var(--ink);
-      background: rgba(255,255,255,.72);
-      border-color: rgba(0,169,157,.25);
-      box-shadow: 0 12px 34px rgba(16,24,40,.06);
-    }
-
+    /* HERO ART */
     .hero-art {
-      position: relative;
-      min-height: 460px;
-      border-radius: 38px;
+      position: relative; min-height: 400px; border-radius: 28px;
       background:
-        linear-gradient(135deg, rgba(255,255,255,.88), rgba(255,255,255,.54)),
-        radial-gradient(circle at 72% 25%, rgba(117,87,255,.20), transparent 34%),
-        radial-gradient(circle at 28% 72%, rgba(0,169,157,.19), transparent 42%);
-      border: 1px solid rgba(231,237,242,.80);
+        linear-gradient(135deg, rgba(255,255,255,.90), rgba(255,255,255,.55)),
+        radial-gradient(circle at 70% 20%, rgba(117,87,255,.18), transparent 32%),
+        radial-gradient(circle at 25% 75%, rgba(0,169,157,.18), transparent 40%);
+      border: 1px solid rgba(231,237,242,.85);
       box-shadow: var(--shadow);
       overflow: hidden;
     }
-
-    .hero-art:before {
+    .hero-art::before {
       content: "";
-      position: absolute;
-      inset: 42px;
-      border-radius: 30px;
+      position: absolute; inset: 36px; border-radius: 20px;
       background:
         linear-gradient(90deg, rgba(16,24,40,.04) 1px, transparent 1px),
         linear-gradient(rgba(16,24,40,.04) 1px, transparent 1px);
-      background-size: 34px 34px;
-      mask-image: radial-gradient(circle at 50% 45%, #000, transparent 74%);
-      opacity: .72;
+      background-size: 28px 28px;
+      mask-image: radial-gradient(circle at 50% 45%, #000, transparent 72%);
     }
-
     .glass-card {
       position: absolute;
-      background: rgba(255,255,255,.78);
+      background: rgba(255,255,255,.82);
       backdrop-filter: blur(20px);
-      border: 1px solid rgba(255,255,255,.9);
-      box-shadow: 0 18px 60px rgba(16,24,40,.10);
-      border-radius: 24px;
+      border: 1px solid rgba(255,255,255,.92);
+      box-shadow: 0 12px 40px rgba(16,24,40,.08);
+      border-radius: 18px; padding: 20px 22px;
     }
-
-    .mini-card-1 {
-      width: 225px;
-      height: 156px;
-      left: 44px;
-      top: 72px;
-      padding: 26px;
-    }
-
-    .mini-card-2 {
-      width: 260px;
-      height: 206px;
-      right: 44px;
-      top: 110px;
-      padding: 26px;
-    }
-
-    .mini-card-3 {
-      width: 330px;
-      min-height: 148px;
-      left: 82px;
-      bottom: 58px;
-      padding: 24px;
-    }
-
-    .pill-row { display: flex; gap: 8px; margin-top: 18px; }
-
-    .pill {
-      height: 10px;
-      border-radius: 999px;
-      background: rgba(0,169,157,.22);
-      flex: 1;
-    }
-
-    .pill:nth-child(2) { background: rgba(117,87,255,.22); flex: 1.5; }
+    .card-a { width: 210px; left: 36px; top: 56px; }
+    .card-b { width: 240px; right: 36px; top: 96px; }
+    .card-c { width: 300px; left: 64px; bottom: 48px; }
+    .card-label { font-size: 12px; font-weight: 700; color: #344054; margin-bottom: 6px; }
+    .card-copy { font-size: 12px; color: #667085; line-height: 1.5; }
+    .pill-row { display: flex; gap: 6px; margin-top: 14px; }
+    .pill { height: 8px; border-radius: 999px; background: rgba(0,169,157,.22); flex: 1; }
+    .pill:nth-child(2) { background: rgba(117,87,255,.22); flex: 1.4; }
     .pill:nth-child(3) { background: rgba(2,127,120,.18); flex: .7; }
+    .mini-bars { display: flex; align-items: flex-end; gap: 7px; height: 64px; margin-top: 14px; }
+    .bar { width: 16px; border-radius: 5px 5px 0 0; background: linear-gradient(180deg, var(--violet), var(--teal)); opacity: .9; }
+    .b1{height:36%}.b2{height:62%}.b3{height:46%}.b4{height:80%}
 
-    .chart {
-      display: flex;
-      align-items: end;
-      gap: 10px;
-      height: 92px;
-      margin-top: 22px;
+    /* DIVIDER */
+    .divider { border: none; border-top: 1px solid var(--line); }
+
+    /* TRUST BAR */
+    .trust-bar {
+      padding: 24px 32px;
+      max-width: 1100px; margin: 0 auto;
+      display: flex; justify-content: center; gap: 48px; flex-wrap: wrap;
     }
+    .trust-item { display: flex; align-items: center; gap: 8px; font-size: 13px; color: #64748b; font-weight: 500; }
+    .trust-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--teal); flex-shrink: 0; }
 
-    .bar {
-      width: 22px;
-      border-radius: 7px 7px 0 0;
-      background: linear-gradient(180deg, var(--violet), var(--teal));
-      opacity: .94;
-    }
-
-    .b1 { height: 38%; }
-    .b2 { height: 64%; }
-    .b3 { height: 48%; }
-    .b4 { height: 82%; }
-
-    .hero-label {
-      font-size: 13px;
-      font-weight: 750;
-      color: #344054;
-      margin-bottom: 8px;
-    }
-
-    .hero-copy {
-      color: #667085;
-      line-height: 1.45;
-      font-size: 14px;
-      letter-spacing: -0.01em;
-    }
-
-    .section {
-      padding: 82px 0;
-      border-top: 1px solid var(--line);
-    }
-
-    .section-grid {
-      display: grid;
-      grid-template-columns: .86fr 1.14fr;
-      gap: 72px;
-      align-items: center;
-    }
-
-    .section-grid.reverse {
-      grid-template-columns: 1.14fr .86fr;
-    }
-
-    .section-copy {
-      max-width: 430px;
-    }
-
-    .icon-badge {
-      width: 54px;
-      height: 54px;
-      border-radius: 18px;
-      display: grid;
-      place-items: center;
-      margin-bottom: 22px;
-      background: linear-gradient(135deg, rgba(0,169,157,.13), rgba(117,87,255,.13));
-      color: var(--teal-dark);
-      border: 1px solid rgba(0,169,157,.17);
-    }
-
-    .icon-badge.violet { color: var(--violet); }
-
-    .section h2 {
-      font-size: clamp(35px, 4vw, 51px);
-      margin: 0 0 12px;
-      letter-spacing: -0.055em;
-      line-height: 1.02;
-    }
-
-    .section .sub {
-      color: var(--teal-dark);
-      font-size: 21px;
-      font-weight: 650;
-      margin: 0 0 28px;
-      letter-spacing: -0.025em;
-    }
-
-    .section .sub.violet { color: var(--violet); }
-
-    .line-list {
-      margin: 0;
-      padding: 0;
-      list-style: none;
-      border-top: 1px solid #e8eef2;
-    }
-
-    .line-list li {
-      padding: 14px 0;
-      border-bottom: 1px solid #e8eef2;
-      color: #475467;
-      font-size: 16px;
-      letter-spacing: -0.015em;
-    }
-
-    .photo-card {
-      position: relative;
-      border-radius: 34px;
-      overflow: hidden;
-      min-height: 390px;
-      box-shadow: var(--shadow);
-      border: 1px solid rgba(255,255,255,.9);
-      background: #eef4f4;
-    }
-
-    .photo-card img {
-      width: 100%;
-      height: 100%;
-      min-height: 390px;
-      display: block;
-      object-fit: cover;
-      filter: saturate(.94) contrast(.98);
-    }
-
-    .photo-card:after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, transparent 52%, rgba(16,24,40,.24));
-      pointer-events: none;
-    }
-
-    .caption-chip {
-      position: absolute;
-      left: 22px;
-      bottom: 22px;
-      z-index: 2;
-      background: rgba(255,255,255,.84);
-      backdrop-filter: blur(15px);
-      border: 1px solid rgba(255,255,255,.7);
-      color: #344054;
-      font-size: 13px;
-      font-weight: 650;
-      border-radius: 999px;
-      padding: 10px 14px;
-      box-shadow: 0 12px 30px rgba(16,24,40,.12);
-    }
-
-    .products {
-      padding: 86px 0;
-      border-top: 1px solid var(--line);
-      background:
-        linear-gradient(180deg, rgba(248,251,252,.9), rgba(255,255,255,.72)),
-        radial-gradient(circle at 10% 10%, rgba(0,169,157,.10), transparent 30%),
-        radial-gradient(circle at 88% 22%, rgba(117,87,255,.10), transparent 30%);
-      margin: 0 calc(50% - 50vw);
-    }
-
-    .products .page { max-width: 1180px; }
-
-    .center {
-      text-align: center;
-      max-width: 760px;
-      margin: 0 auto 38px;
-    }
-
-    .center h2 {
-      font-size: clamp(38px, 5vw, 58px);
-      line-height: 1;
-      margin: 0 0 16px;
-      letter-spacing: -0.06em;
-    }
-
-    .center p {
-      color: #667085;
-      line-height: 1.6;
-      font-size: 18px;
-      margin: 0;
-    }
-
-    .product-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 22px;
-    }
-
+    /* PRODUCTS */
+    .products-section { padding: 80px 32px; max-width: 1100px; margin: 0 auto; }
+    .section-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 0.09em; text-transform: uppercase; color: var(--teal-dark); margin-bottom: 10px; }
+    .section-title { font-size: 32px; font-weight: 700; color: #0f172a; letter-spacing: -0.4px; margin-bottom: 12px; line-height: 1.2; }
+    .section-sub { font-size: 16px; color: #475569; line-height: 1.8; margin-bottom: 48px; max-width: 560px; }
+    .product-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
     .product-card {
-      padding: 34px;
-      border-radius: 30px;
-      background: rgba(255,255,255,.82);
-      backdrop-filter: blur(18px);
-      border: 1px solid rgba(231,237,242,.86);
-      box-shadow: var(--small-shadow);
-      min-height: 286px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      position: relative;
-      overflow: hidden;
+      border: 1px solid var(--line); border-radius: 20px;
+      padding: 32px 28px; background: rgba(255,255,255,.88);
+      box-shadow: 0 4px 16px rgba(16,24,40,.05);
+      display: flex; flex-direction: column; gap: 0;
+      transition: box-shadow 0.2s ease, transform 0.2s ease;
     }
-
-    .product-card:before {
-      content: "";
-      position: absolute;
-      width: 190px;
-      height: 190px;
-      border-radius: 999px;
-      right: -70px;
-      top: -80px;
-      background: rgba(0,169,157,.10);
+    .product-card:hover { box-shadow: 0 12px 40px rgba(16,24,40,.10); transform: translateY(-2px); }
+    .product-logo { margin-bottom: 20px; }
+    .product-logo img { height: 32px; width: auto; }
+    .product-logo-white {
+      background: #1E3A5F; border-radius: 8px;
+      padding: 8px 14px; display: inline-block;
     }
-
-    .product-card.violet-card:before { background: rgba(117,87,255,.11); }
-
-    .product-meta {
-      display: inline-flex;
-      gap: 8px;
-      align-items: center;
-      color: var(--teal-dark);
-      background: rgba(0,169,157,.09);
-      border: 1px solid rgba(0,169,157,.14);
-      border-radius: 999px;
-      padding: 8px 12px;
-      font-size: 12px;
-      font-weight: 760;
-      width: fit-content;
-      margin-bottom: 22px;
-      letter-spacing: .06em;
-      text-transform: uppercase;
-    }
-
-    .product-meta.violet-meta {
-      color: var(--violet);
-      background: rgba(117,87,255,.09);
-      border-color: rgba(117,87,255,.15);
-    }
-
-    .product-card h3 {
-      font-size: 30px;
-      margin: 0 0 12px;
-      letter-spacing: -0.045em;
-    }
-
-    .product-card p {
-      margin: 0;
-      color: #667085;
-      line-height: 1.55;
-      font-size: 16px;
-      max-width: 480px;
-    }
-
+    .product-logo-white img { height: 22px; width: auto; }
+    .product-desc { font-size: 14px; color: #475569; line-height: 1.75; margin-bottom: 24px; flex: 1; }
     .product-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 9px;
-      margin-top: 28px;
-      font-weight: 750;
-      color: var(--ink);
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 14px; font-weight: 600; color: var(--teal-dark);
+      border-top: 1px solid var(--line); padding-top: 18px;
     }
-
-    .product-link span {
-      width: 26px;
-      height: 26px;
-      border-radius: 50%;
-      display: inline-grid;
-      place-items: center;
-      background: #f2f9f8;
-      color: var(--teal-dark);
+    .product-link:hover { color: var(--violet); }
+    .product-link-disabled {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 14px; font-weight: 500; color: #94a3b8;
+      border-top: 1px solid var(--line); padding-top: 18px;
     }
-
-    .product-card.violet-card .product-link span {
-      background: var(--violet-soft);
-      color: var(--violet);
+    .product-badge {
+      display: inline-block; font-size: 11px; font-weight: 600;
+      border-radius: 20px; padding: 3px 10px; margin-bottom: 14px;
+      align-self: flex-start;
     }
+    .badge-live { background: #DCFCE7; color: #166534; }
+    .badge-soon { background: var(--violet-soft); color: var(--violet); }
+    .product-name { font-size: 18px; font-weight: 700; color: #0f172a; margin-bottom: 10px; letter-spacing: -0.2px; }
 
-    .trust {
-      padding: 44px 0 82px;
+    /* MISSION */
+    .mission-section {
+      padding: 80px 32px;
+      background:
+        radial-gradient(circle at 10% 50%, rgba(0,169,157,.06), transparent 40%),
+        radial-gradient(circle at 90% 50%, rgba(117,87,255,.07), transparent 40%),
+        linear-gradient(180deg, #f8fbfc, #ffffff);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
     }
-
-    .trust-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
+    .mission-inner { max-width: 1100px; margin: 0 auto; }
+    .beliefs { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-top: 36px; }
+    .belief {
+      border-radius: 18px; padding: 24px;
+      background: linear-gradient(180deg, rgba(255,255,255,.94), rgba(248,251,252,.88));
+      border: 1px solid rgba(231,237,242,.94);
     }
+    .belief-icon { font-size: 22px; margin-bottom: 12px; }
+    .belief h3 { font-size: 15px; font-weight: 700; color: #0f172a; margin-bottom: 8px; }
+    .belief p { font-size: 13px; color: #667085; line-height: 1.7; }
 
-    .trust-card {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      padding: 22px;
-      border-radius: 22px;
-      background: rgba(255,255,255,.82);
-      border: 1px solid rgba(231,237,242,.92);
-      box-shadow: 0 14px 34px rgba(16,24,40,.05);
-      font-weight: 650;
-      color: #344054;
+    /* CONTACT */
+    .contact-section { padding: 80px 32px; max-width: 1100px; margin: 0 auto; }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 32px; }
+    .contact-card {
+      border-radius: 18px; padding: 26px;
+      background: rgba(255,255,255,.88);
+      border: 1px solid var(--line);
+      box-shadow: 0 4px 16px rgba(16,24,40,.04);
     }
+    .contact-card h3 { font-size: 15px; font-weight: 700; color: #0f172a; margin-bottom: 8px; }
+    .contact-card p { font-size: 14px; color: #475569; line-height: 1.7; }
+    .contact-card a { color: var(--teal-dark); font-weight: 600; }
+    .contact-card a:hover { color: var(--violet); }
 
-    .trust-icon {
-      width: 42px;
-      height: 42px;
-      border-radius: 15px;
-      display: grid;
-      place-items: center;
-      background: linear-gradient(135deg, rgba(0,169,157,.12), rgba(117,87,255,.12));
-      color: var(--teal-dark);
-      flex: 0 0 auto;
-    }
-
+    /* FOOTER */
     footer {
       border-top: 1px solid var(--line);
-      padding: 34px 0;
-      background: white;
+      padding: 32px;
+      background: rgba(248,251,252,.60);
     }
-
     .footer-inner {
-      max-width: 1180px;
-      margin: 0 auto;
-      padding: 0 24px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-      flex-wrap: wrap;
+      max-width: 1100px; margin: 0 auto;
+      display: flex; justify-content: space-between;
+      align-items: center; flex-wrap: wrap; gap: 16px;
     }
+    .footer-links { display: flex; gap: 24px; font-size: 13px; color: #64748b; flex-wrap: wrap; }
+    .footer-links a:hover { color: var(--teal-dark); }
+    .footer-legal { font-size: 12px; color: #94a3b8; }
 
-    .footer-links {
-      display: flex;
-      gap: 28px;
-      color: #475467;
-      font-size: 14px;
-      font-weight: 560;
+    @media(max-width:900px){
+      .hero,.product-grid,.beliefs,.contact-grid{grid-template-columns:1fr}
+      .hero{padding:56px 24px 48px}
+      .hero-art{display:none}
+      .products-section,.mission-section,.contact-section{padding:56px 24px}
+      .trust-bar{gap:24px;padding:20px 24px}
     }
-
-    .legal-note {
-      color: #98a2b3;
-      font-size: 12px;
-      width: 100%;
-      margin-top: 14px;
-    }
-
-
-
-    .content-section {
-      padding: 86px 0;
-      border-top: 1px solid var(--line);
-    }
-
-    .content-panel {
-      border-radius: 34px;
-      background: rgba(255,255,255,.78);
-      backdrop-filter: blur(18px);
-      border: 1px solid rgba(231,237,242,.92);
-      box-shadow: var(--small-shadow);
-      padding: clamp(28px, 5vw, 54px);
-    }
-
-    .section-kicker {
-      color: var(--teal-dark);
-      font-size: 12px;
-      font-weight: 800;
-      letter-spacing: .16em;
-      text-transform: uppercase;
-      margin-bottom: 14px;
-    }
-
-    .content-panel h2, .legal-area h2 {
-      font-size: clamp(34px, 4.8vw, 56px);
-      line-height: 1;
-      margin: 0 0 18px;
-      letter-spacing: -0.06em;
-    }
-
-    .content-panel p, .legal-block p, .contact-card p {
-      color: #667085;
-      line-height: 1.62;
-      font-size: 16px;
-      margin: 0;
-      letter-spacing: -0.01em;
-    }
-
-    .belief-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-      margin-top: 34px;
-    }
-
-    .belief-card {
-      border-radius: 24px;
-      padding: 24px;
-      background: linear-gradient(180deg, rgba(255,255,255,.92), rgba(248,251,252,.86));
-      border: 1px solid rgba(231,237,242,.92);
-    }
-
-    .belief-card h3, .contact-card h3, .legal-block h3 {
-      margin: 0 0 10px;
-      font-size: 20px;
-      letter-spacing: -0.035em;
-    }
-
-    .contact-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-      margin-top: 30px;
-    }
-
-    .contact-card {
-      border-radius: 26px;
-      padding: 28px;
-      background: rgba(255,255,255,.86);
-      border: 1px solid rgba(231,237,242,.94);
-      box-shadow: 0 12px 34px rgba(16,24,40,.05);
-    }
-
-    .contact-card a { color: var(--teal-dark); font-weight: 750; }
-
-    .legal-area {
-      padding: 86px 0;
-      border-top: 1px solid var(--line);
-      background: linear-gradient(180deg, rgba(248,251,252,.72), #fff);
-      margin: 0 calc(50% - 50vw);
-    }
-
-    .legal-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
-      margin-top: 34px;
-    }
-
-    .legal-block {
-      border-radius: 28px;
-      padding: 30px;
-      background: rgba(255,255,255,.86);
-      border: 1px solid rgba(231,237,242,.92);
-      box-shadow: 0 14px 34px rgba(16,24,40,.05);
-      scroll-margin-top: 92px;
-    }
-
-    .legal-list {
-      margin: 16px 0 0;
-      padding-left: 18px;
-      color: #667085;
-      line-height: 1.65;
-      font-size: 15px;
-    }
-
-    .fine-print {
-      margin-top: 28px;
-      color: #98a2b3;
-      font-size: 13px;
-      line-height: 1.55;
-    }
-
-    @media (max-width: 900px) {
-      .hero, .section-grid, .section-grid.reverse, .product-grid, .trust-grid, .belief-grid, .contact-grid, .legal-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .hero { padding-top: 56px; }
-      .hero-art { min-height: 380px; }
-      .mini-card-2 { right: 24px; }
-      .mini-card-3 { left: 24px; width: calc(100% - 48px); }
-      .section { padding: 62px 0; }
-      .section-grid.reverse .photo-card { order: 2; }
-      .section-grid.reverse .section-copy { order: 1; }
-    }
-
-    @media (max-width: 640px) {
-      .nav-inner { padding: 18px 18px; }
-      .nav-links { display: none; }
-      .page { padding: 0 18px; }
-      h1 { font-size: 46px; }
-      .lead { font-size: 18px; }
-      .actions { flex-direction: column; }
-      .button { width: 100%; }
-      .hero-art { display: none; }
-      .photo-card, .photo-card img { min-height: 300px; }
-      .product-card { padding: 26px; }
-      .footer-inner { align-items: flex-start; }
-      .footer-links { flex-wrap: wrap; gap: 18px; }
+    @media(max-width:640px){
+      .nav-inner{padding:16px 20px}
+      .nav-links{display:none}
+      .footer-inner{flex-direction:column;align-items:flex-start}
     }
   </style>
 </head>
 <body>
-  <header class="nav">
-    <div class="nav-inner">
-      <a class="brand" href="#" aria-label="Neomite home">
-        <svg viewBox="0 0 64 64" fill="none" aria-hidden="true">
-          <path d="M13 47V20c0-4 2.8-7 6.7-7 2.2 0 4.1 1 5.5 2.7L43 38" stroke="url(#g1)" stroke-width="7.2" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M22 32l13 16c1.5 1.8 3.5 2.8 5.9 2.8 4.2 0 7.1-3.1 7.1-7.2V17" stroke="url(#g2)" stroke-width="7.2" stroke-linecap="round" stroke-linejoin="round"/>
-          <defs>
-            <linearGradient id="g1" x1="8" y1="11" x2="50" y2="48" gradientUnits="userSpaceOnUse"><stop stop-color="#00A99D"/><stop offset="1" stop-color="#7557FF"/></linearGradient>
-            <linearGradient id="g2" x1="21" y1="31" x2="53" y2="17" gradientUnits="userSpaceOnUse"><stop stop-color="#00A99D"/><stop offset="1" stop-color="#7557FF"/></linearGradient>
-          </defs>
-        </svg>
-        Neomite
-      </a>
-      <nav class="nav-links" aria-label="Main navigation">
-        <a href="#products">Products</a>
-        <a href="#about-company">About</a>
-        <a href="#contact">Contact</a>
-      </nav>
+
+<!-- NAV -->
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="#" aria-label="Neomite home">
+      <svg viewBox="0 0 64 64" fill="none" aria-hidden="true">
+        <path d="M13 47V20c0-4 2.8-7 6.7-7 2.2 0 4.1 1 5.5 2.7L43 38" stroke="url(#g1)" stroke-width="7.2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M22 32l13 16c1.5 1.8 3.5 2.8 5.9 2.8 4.2 0 7.1-3.1 7.1-7.2V17" stroke="url(#g2)" stroke-width="7.2" stroke-linecap="round" stroke-linejoin="round"/>
+        <defs>
+          <linearGradient id="g1" x1="8" y1="11" x2="50" y2="48" gradientUnits="userSpaceOnUse"><stop stop-color="#00A99D"/><stop offset="1" stop-color="#7557FF"/></linearGradient>
+          <linearGradient id="g2" x1="21" y1="31" x2="53" y2="17" gradientUnits="userSpaceOnUse"><stop stop-color="#00A99D"/><stop offset="1" stop-color="#7557FF"/></linearGradient>
+        </defs>
+      </svg>
+      Neomite<span class="brand-sub">Labs</span>
+    </a>
+    <nav class="nav-links">
+      <a href="#products">Products</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a class="nav-cta" href="#contact">Get in touch</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div>
+    <div class="hero-eyebrow"><span class="hero-eyebrow-dot"></span>Neomite Labs LLC</div>
+    <h1>AI tools built for <span>small businesses</span></h1>
+    <p class="hero-sub">Large enterprises have ERP systems, legal teams, and procurement specialists. Small businesses have you. Neomite builds focused AI tools that close that gap.</p>
+    <div class="hero-btns">
+      <a class="btn-primary" href="#products">Explore products</a>
+      <a class="btn-secondary" href="#contact">Contact us</a>
     </div>
-  </header>
-
-  <main>
-    <section class="page hero" id="about">
-      <div>
-        <div class="eyebrow">Neomite</div>
-        <h1>Practical software for complex small business work.</h1>
-        <p class="lead">Neomite builds software for teams without expensive ERP systems or in-house IT.</p>
-        <div class="actions">
-          <a class="button primary" href="#products">Explore Products</a>
-          <a class="button secondary" href="#contact">Contact Us</a>
-        </div>
-      </div>
-      <div class="hero-art" aria-label="Abstract business workflow illustration">
-        <div class="glass-card mini-card-1">
-          <div class="hero-label">Rules first</div>
-          <div class="hero-copy">Structured workflows before automation.</div>
-          <div class="pill-row"><div class="pill"></div><div class="pill"></div><div class="pill"></div></div>
-        </div>
-        <div class="glass-card mini-card-2">
-          <div class="hero-label">Clear review</div>
-          <div class="hero-copy">Show what changed, what matched, and what needs attention.</div>
-          <div class="chart"><div class="bar b1"></div><div class="bar b2"></div><div class="bar b3"></div><div class="bar b4"></div></div>
-        </div>
-        <div class="glass-card mini-card-3">
-          <div class="hero-label">Human approval stays in control</div>
-          <div class="hero-copy">Neomite products organize information and explain findings. People make the final business decisions.</div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="page section-grid">
-        <div class="section-copy">
-          <div class="icon-badge" aria-hidden="true">
-            <svg width="25" height="25" viewBox="0 0 24 24" fill="none"><path d="M7 3h7l4 4v14H7V3z" stroke="currentColor" stroke-width="1.8"/><path d="M14 3v5h5M10 12h6M10 16h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
-          </div>
-          <h2>Document Analysis</h2>
-          <p class="sub">For contractors and vendors.</p>
-          <ul class="line-list">
-            <li>Review large RFP packages.</li>
-            <li>Track last-minute addenda.</li>
-            <li>Find requirements fast.</li>
-            <li>Move from reading to action.</li>
-          </ul>
-        </div>
-        <div class="photo-card">
-          <img src="https://images.pexels.com/photos/8482865/pexels-photo-8482865.jpeg?auto=compress&cs=tinysrgb&w=1400" alt="Contractors reviewing plans and documents with a laptop" />
-          <div class="caption-chip">RFPs, attachments, deadlines, and addenda</div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="page section-grid reverse">
-        <div class="photo-card">
-          <img src="https://images.pexels.com/photos/7680736/pexels-photo-7680736.jpeg?auto=compress&cs=tinysrgb&w=1400" alt="Accountant reviewing receipts and financial documents with a calculator" />
-          <div class="caption-chip">Deposits, invoices, fees, and exceptions</div>
-        </div>
-        <div class="section-copy">
-          <div class="icon-badge violet" aria-hidden="true">
-            <svg width="25" height="25" viewBox="0 0 24 24" fill="none"><path d="M5 3h14v18H5V3z" stroke="currentColor" stroke-width="1.8"/><path d="M8 7h8M8 11h2M12 11h2M16 11h1M8 15h2M12 15h2M16 15h1" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
-          </div>
-          <h2>Financial Reconciliation</h2>
-          <p class="sub violet">For accountants and finance teams.</p>
-          <ul class="line-list">
-            <li>Match deposits to invoices.</li>
-            <li>Understand fees and partial payments.</li>
-            <li>Review exceptions clearly.</li>
-            <li>Approve with confidence.</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <section class="products" id="products">
-      <div class="page">
-        <div class="center">
-          <h2>Focused products for real operating work.</h2>
-          <p>Neomite products are built around specific business workflows, with clear review paths, explainable findings, and practical human approval.</p>
-        </div>
-        <div class="product-grid">
-          <article class="product-card">
-            <div>
-              <div class="product-meta">Launching August</div>
-              <h3>ShouldIBid</h3>
-              <p>RFP intelligence for vendors reviewing large bid packages, scattered requirements, changing addenda, and decision timelines.</p>
-            </div>
-            <a class="product-link" href="https://shouldibid.ai" target="_blank" rel="noopener noreferrer">Visit ShouldIBid <span>→</span></a>
-          </article>
-          <article class="product-card violet-card">
-            <div>
-              <div class="product-meta violet-meta">Planned December</div>
-              <h3>Fincline</h3>
-              <p>Payment reconciliation for businesses and accountants matching deposits, invoices, fees, partial payments, and exceptions.</p>
-            </div>
-            <a class="product-link" href="https://fincline.com" target="_blank" rel="noopener noreferrer">Visit Fincline <span>→</span></a>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="page trust">
-      <div class="trust-grid">
-        <div class="trust-card"><div class="trust-icon" aria-hidden="true">✓</div>No large ERP required</div>
-        <div class="trust-card"><div class="trust-icon" aria-hidden="true">◇</div>No internal IT team needed</div>
-        <div class="trust-card"><div class="trust-icon" aria-hidden="true">◎</div>Human approval stays in control</div>
-      </div>
-    </section>
-
-
-    <section class="page content-section" id="about-company">
-      <div class="content-panel">
-        <div class="section-kicker">About Neomite</div>
-        <h2>Built for small businesses doing serious work.</h2>
-        <p>Small businesses often face enterprise-level complexity without enterprise-level systems. Neomite builds practical software for teams that need clarity, control, and simple review paths.</p>
-        <div class="belief-grid">
-          <div class="belief-card">
-            <h3>Rules first</h3>
-            <p>Business rules should be visible, structured, and easy to review.</p>
-          </div>
-          <div class="belief-card">
-            <h3>AI where useful</h3>
-            <p>AI should help organize information, explain findings, and reduce manual effort.</p>
-          </div>
-          <div class="belief-card">
-            <h3>People approve</h3>
-            <p>Important business decisions stay with the customer, not the software.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="page content-section" id="contact">
-      <div class="content-panel">
-        <div class="section-kicker">Contact</div>
-        <h2>Talk to Neomite.</h2>
-        <p>Contact us for product questions, billing questions, support, or business inquiries.</p>
-        <div class="contact-grid">
-          <div class="contact-card">
-            <h3>General contact</h3>
-            <p>Email: <a href="mailto:contact@neomite.com">contact@neomite.com</a></p>
-          </div>
-          <div class="contact-card">
-            <h3>Support</h3>
-            <p>Email: <a href="mailto:support@neomite.com">support@neomite.com</a></p>
-          </div>
-        </div>
-        <p class="fine-print">Neomite Labs LLC is a California software company. This review page uses placeholder contact details until the final company mailbox is configured.</p>
-      </div>
-    </section>
-
-    <section class="legal-area" aria-label="Policies and legal information">
-      <div class="page">
-        <div class="center">
-          <div class="section-kicker">Policies</div>
-          <h2>Clear terms for business software.</h2>
-          <p>These short policy sections are written for the review version of the site. Final legal language should be reviewed before production launch.</p>
-        </div>
-        <div class="legal-grid">
-          <article class="legal-block" id="privacy">
-            <h3>Privacy Policy</h3>
-            <p>Neomite collects information needed to provide our software products, support users, manage accounts, and process subscriptions.</p>
-            <ul class="legal-list">
-              <li>Account details such as name, email, company, and login information.</li>
-              <li>Uploaded documents and business data used to provide product analysis.</li>
-              <li>Billing details handled by Stripe or another payment provider.</li>
-              <li>Usage data used to improve reliability, support, and product quality.</li>
-            </ul>
-          </article>
-
-          <article class="legal-block" id="terms">
-            <h3>Terms of Service</h3>
-            <p>Neomite provides software tools for business workflow support. Customers are responsible for reviewing outputs and making final business decisions.</p>
-            <ul class="legal-list">
-              <li>Use the products only for lawful business purposes.</li>
-              <li>Do not upload content you are not authorized to use.</li>
-              <li>AI-assisted outputs may be incomplete or incorrect and should be reviewed.</li>
-              <li>Neomite does not guarantee contract awards, financial outcomes, or compliance results.</li>
-            </ul>
-          </article>
-
-          <article class="legal-block" id="refund">
-            <h3>Refund & Cancellation Policy</h3>
-            <p>Customers may cancel a subscription at any time. Access continues through the current billing period unless otherwise stated.</p>
-            <ul class="legal-list">
-              <li>Monthly subscription payments are generally non-refundable after access is provided.</li>
-              <li>Refunds may be considered for duplicate charges, billing errors, or required legal exceptions.</li>
-              <li>Free trials and free tiers may have usage limits.</li>
-              <li>Subscription changes are handled through the product billing flow or support.</li>
-            </ul>
-          </article>
-
-          <article class="legal-block" id="security">
-            <h3>Security & Data Handling</h3>
-            <p>Neomite products are designed for business users who upload sensitive operational documents and financial information.</p>
-            <ul class="legal-list">
-              <li>Customer data is used to provide the requested product functionality.</li>
-              <li>Access is limited to authorized users and service providers.</li>
-              <li>Documents are not sold to advertisers or unrelated third parties.</li>
-              <li>Customers may request account or data deletion through support.</li>
-            </ul>
-          </article>
-        </div>
-        <p class="fine-print">This page is not legal advice. Before accepting payments or launching publicly, Neomite Labs LLC should finalize policies with appropriate legal review.</p>
-      </div>
-    </section>
-
-  </main>
-
-  <footer>
-    <div class="footer-inner">
-      <a class="brand" href="#" aria-label="Neomite home">
-        <svg viewBox="0 0 64 64" fill="none" aria-hidden="true">
-          <path d="M13 47V20c0-4 2.8-7 6.7-7 2.2 0 4.1 1 5.5 2.7L43 38" stroke="url(#fg1)" stroke-width="7.2" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M22 32l13 16c1.5 1.8 3.5 2.8 5.9 2.8 4.2 0 7.1-3.1 7.1-7.2V17" stroke="url(#fg2)" stroke-width="7.2" stroke-linecap="round" stroke-linejoin="round"/>
-          <defs>
-            <linearGradient id="fg1" x1="8" y1="11" x2="50" y2="48" gradientUnits="userSpaceOnUse"><stop stop-color="#00A99D"/><stop offset="1" stop-color="#7557FF"/></linearGradient>
-            <linearGradient id="fg2" x1="21" y1="31" x2="53" y2="17" gradientUnits="userSpaceOnUse"><stop stop-color="#00A99D"/><stop offset="1" stop-color="#7557FF"/></linearGradient>
-          </defs>
-        </svg>
-        Neomite
-      </a>
-      <div class="footer-links">
-        <a href="#privacy">Privacy</a>
-        <a href="#terms">Terms</a>
-        <a href="#refund">Refund Policy</a>
-        <a href="#security">Security</a>
-        <a href="#contact">Contact</a>
-      </div>
-      <div class="legal-note">© 2026 Neomite Labs LLC. Review version. Photography sourced from Pexels for commercial-use website review.</div>
+  </div>
+  <div class="hero-art" aria-hidden="true">
+    <div class="glass-card card-a">
+      <div class="card-label">Document intelligence</div>
+      <div class="card-copy">Surface requirements, risks, and hard stops before investing hours in a response.</div>
+      <div class="pill-row"><div class="pill"></div><div class="pill"></div><div class="pill"></div></div>
     </div>
-  </footer>
+    <div class="glass-card card-b">
+      <div class="card-label">Payment reconciliation</div>
+      <div class="card-copy">Match deposits to invoices automatically. Review exceptions clearly.</div>
+      <div class="mini-bars"><div class="bar b1"></div><div class="bar b2"></div><div class="bar b3"></div><div class="bar b4"></div></div>
+    </div>
+    <div class="glass-card card-c">
+      <div class="card-label">People make the final decision</div>
+      <div class="card-copy">Neomite tools organize information and explain findings. Business decisions stay with you.</div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-item"><span class="trust-dot"></span>California LLC</div>
+  <div class="trust-item"><span class="trust-dot"></span>No ERP required</div>
+  <div class="trust-item"><span class="trust-dot"></span>AI-assisted, human-approved</div>
+  <div class="trust-item"><span class="trust-dot"></span>Built for small business teams</div>
+</div>
+
+<hr class="divider">
+
+<!-- PRODUCTS -->
+<section class="products-section" id="products">
+  <p class="section-eyebrow">Our products</p>
+  <h2 class="section-title">Focused tools for real business work</h2>
+  <p class="section-sub">Each Neomite product targets one specific workflow where small businesses are underserved by existing software.</p>
+  <div class="product-grid">
+
+    <div class="product-card">
+      <div class="product-logo">
+        <div class="product-logo-white">
+          <img src="data:image/png;base64,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" alt="ShouldIBid">
+        </div>
+      </div>
+      
+      <div class="product-desc">AI-powered RFP intelligence for small contractors. VIN reads the full document package, finds hard stops and disqualifiers, and gives you a plain-English briefing in minutes — so you can decide if an opportunity is worth pursuing before you invest a week on it.</div>
+      <a class="product-link" href="https://shouldibid.ai" target="_blank" rel="noopener">
+        Visit shouldibid.ai
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      </a>
+    </div>
+
+    <div class="product-card">
+      <div class="product-logo">
+        <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wgARCACAAfgDASIAAhEBAxEB/8QAGgABAAMBAQEAAAAAAAAAAAAAAAQFBgMCAf/EABgBAQEBAQEAAAAAAAAAAAAAAAABAwIE/9oADAMBAAIQAxAAAAK/AOSdfNRD24ueNX904n+YTqS/Mb7Z2881nW/qrXzbBloAAAAAAAAAAAAAAAAAAAAAAAIVnyn8vVh9fHfPp5Hp5Ht49H333tcu/XQ82wKIZMQxMQxMcO4UNgTgAAAAAADidkOYEaoNA8ewAAAAAADxnLKp9GP18s++IM60g5d++1bzq5+0hbz3QC/R5GOgSgMTtsShaXhj2wFLeva421u/qfT4v18+hy6H0AB55nYChvqEp9tidslXntr5OEkU+fQ8+DqAAczo8ewDPRvvr2eeZZeaTLr14+NuPTz2TwkdObDkSrHjv0PPsAAxO2xKW9/k55eqIXrj2XE3NNcpe5HXZEk8I+iM370mcNJOymrVQyc8n35e2JltDUQzZ0N5RrT7bE7ZKrPaHPGu59Oa5W5ppqRPOqryDqMXoC249sqvyJJ0iZKwu8ya5Rlhz4dr6cONd25dT1byJGHfn0Z6AoAAADE7bEp07zL8yjViPIFxNzTXKXuR12RO+nzWlGb0mcIWwx+wMxH6/DVheceYPlFfUJT7bE7ZKrPaHPGu59Oa5XSZvSpY+fXxcVdUt0lvjtdkSznVPcn1fURE4e5nWFtnDmcZ/XNiPPuAAAAAAxO2xKW9/QX4CgYm5prlL3I67IknS5rSjOaPOELYY/YGerNZlDXdchLLKphzTSUl9QrT7bE7ZKrPaHPGu59Oa5XS5rSpY/PvxcVdUt0l3jNpSnO+xNkaSDVVhqUEt3RXvPrmv9ePHfFwMtQAAAAAFJdiBPAACkmzgqLcVtkCusRT3AOHcUXLREqLX0VAnikuwi112OfnsKSzkACkmzgBX1+gGfnWQAA8Vtqsr7CLysnuXXmgoAAAAAAAAAAAAAAAAAAAAAAAAAAH/9oADAMBAAIAAwAAACHzuiiQnXbzzzzzzzzzzzzzzzzzzzzzzzzzN0zwiZ/zzzzjjzzzzzzzjzTTzzzzzzysf3HCDXzyk81R3jzDzzzTxVVzDjzzjTyinZ0vhzzyl33xf19vzmtvxWsAO+Wy8PAri/3zzzzymc1xf3X1XvwxxWsAeheP/wDNlt8888888pV88X9V9Vv13cVrAXoXJdlM9H88888888c88s8cs889c88csss88Mc88e238888888888888888888888888888/9oADAMBAAIAAwAAABDz37trovXzzzzzzzzzzzzzzzzzzzzzzzzk6dFBgL3zzzzjrzzzzzzzzzLTzzzzzzyzoKNJnTzysU+xfzjTzzTz5dPDTzzzjTwwHq567zzyv/8A8VrFJebNt+XBqEt3uB9ApTvf88888rtPcVrX/XB8seXBqV4RBNN/fT8888888r/88VrX/Xp3JeXBqVoBfz/8+r0888888sc88e8c8cs/c8cMccse8ee88e3x8888888888888888888888888888/8QANBEAAQMCAwQHBgcAAAAAAAAAAQACAwQRECExBRIwQRMVIDJRYfAiQEKRobEjJENxwdHh/9oACAECAQE/AExjnndaLlQbHe7OU2TNlUzdRf8Ac/0hQ0w+AIUsA0YPkEIoxo0fJbYlDpgwfD/PvMMTpXhjdSqWljp22brzKut4LfHijI0Zkqq2pHGLR5lOcXEudqe1bhW4OyoAyPpDqfsqipZA3echU1dSfwW2Hrnourqx/ek+pXVEx/U+66mkOr1Kzo3ll72xCur4X4ARQPBYBFEB4BRQmtmMkndH1TQGiw0Tpo2d42Rr6cfEFVbWYGlsOvj2AiFbAoYXRQCutUEUFzRV0UFey1RVZJaDeHNUzRFA0eSq9ovkduxmwRJOZ7QRKvgUEUEVyxCKC5o4FBZLJFb/AE1F5tVTN+TBHMDgBHEoIoIoK2ARQXNHAoIhWRVLP0Ls9DqiLwmEZ82+Y/ziX7V+xfC+F8Lq+MU7o8tR608FI2OX2mGx88vXrROaW5H33//EAC0RAAEDAgQEBQQDAAAAAAAAAAEAAgMQEQQSITEgMEBBBRMUMlEiQnGRobHw/9oACAEDAQE/AE5waLlSY9o0YLp2NmOxsjiZj9yM0p3cf2i9x3K8PYRGXHv1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" alt="Fincline" style="height:32px;width:auto;border-radius:4px;">
+      </div>
+      
+      <div class="product-desc">Payment reconciliation for small business accounting teams. Fincline matches deposits to invoices automatically, handles partial payments and fees, flags exceptions clearly, and keeps human approval at the center of the close process.</div>
+      <a class="product-link" href="https://fincline.com" target="_blank" rel="noopener">
+        Visit fincline.com
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      </a>
+    </div>
+
+    <div class="product-card" style="background:linear-gradient(135deg,rgba(255,255,255,.70),rgba(239,234,255,.40));border-color:rgba(117,87,255,.15);">
+      <div class="product-logo" style="height:32px;display:flex;align-items:center;">
+        <span style="font-size:18px;font-weight:700;color:#7557ff;letter-spacing:-0.3px;">LoanLens</span>
+      </div>
+      
+      <div class="product-desc">AI-assisted loan document processing. LoanLens reduces time to completion by automatically verifying loan document packages — surfacing missing items, inconsistencies, and compliance gaps before they cause delays.</div>
+      <span class="product-link-disabled">
+        In development
+      </span>
+    </div>
+
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- MISSION -->
+<section class="mission-section" id="about">
+  <div class="mission-inner">
+    <p class="section-eyebrow">About Neomite</p>
+    <h2 class="section-title">Built for small businesses doing serious work</h2>
+    <p class="section-sub">Small businesses face enterprise-level complexity without enterprise-level systems. Neomite builds focused AI tools that give small teams capabilities previously reserved for large organizations — without requiring ERP systems, IT departments, or procurement specialists.</p>
+    <div class="beliefs">
+      <div class="belief">
+        <div class="belief-icon">🎯</div>
+        <h3>One workflow at a time</h3>
+        <p>Each Neomite product targets a single specific workflow. Focused tools work better than broad platforms for small teams.</p>
+      </div>
+      <div class="belief">
+        <div class="belief-icon">🤖</div>
+        <h3>AI where it helps</h3>
+        <p>AI should organize information, surface findings, and reduce manual effort — not replace judgment or make decisions.</p>
+      </div>
+      <div class="belief">
+        <div class="belief-icon">✅</div>
+        <h3>People approve</h3>
+        <p>Important business decisions stay with the customer. Neomite tools inform and organize. Humans decide.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <p class="section-eyebrow">Contact</p>
+  <h2 class="section-title">Get in touch</h2>
+  <p class="section-sub">Questions about our products, billing, partnerships, or press. We're a small team and respond within one business day.</p>
+  <div class="contact-grid">
+    <div class="contact-card">
+      <h3>General inquiries</h3>
+      <p>Product questions, partnerships, and business inquiries.<br><br>
+      <a href="mailto:hello@shouldibid.ai">hello@shouldibid.ai</a></p>
+    </div>
+    <div class="contact-card">
+      <h3>Product support</h3>
+      <p>Support for ShouldIBid, Fincline, or billing questions.<br><br>
+      <a href="mailto:hello@shouldibid.ai">hello@shouldibid.ai</a></p>
+    </div>
+    <div class="contact-card">
+      <h3>Company</h3>
+      <p>Neomite Labs LLC<br>California, United States<br><br>
+      Registered in California &nbsp;·&nbsp; EIN on file</p>
+    </div>
+    <div class="contact-card">
+      <h3>Products</h3>
+      <p>
+        <a href="https://shouldibid.ai">shouldibid.ai</a> — RFP intelligence<br>
+        <a href="https://fincline.com">fincline.com</a> — Payment reconciliation<br>
+        <a href="https://rfp4.com">rfp4.com</a> — ShouldIBid marketing
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <a class="brand" href="#" style="font-size:16px;">
+      <svg viewBox="0 0 64 64" fill="none" width="26" height="26">
+        <path d="M13 47V20c0-4 2.8-7 6.7-7 2.2 0 4.1 1 5.5 2.7L43 38" stroke="url(#fg1)" stroke-width="7.2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M22 32l13 16c1.5 1.8 3.5 2.8 5.9 2.8 4.2 0 7.1-3.1 7.1-7.2V17" stroke="url(#fg2)" stroke-width="7.2" stroke-linecap="round" stroke-linejoin="round"/>
+        <defs>
+          <linearGradient id="fg1" x1="8" y1="11" x2="50" y2="48" gradientUnits="userSpaceOnUse"><stop stop-color="#00A99D"/><stop offset="1" stop-color="#7557FF"/></linearGradient>
+          <linearGradient id="fg2" x1="21" y1="31" x2="53" y2="17" gradientUnits="userSpaceOnUse"><stop stop-color="#00A99D"/><stop offset="1" stop-color="#7557FF"/></linearGradient>
+        </defs>
+      </svg>
+      Neomite Labs
+    </a>
+    <div class="footer-links">
+      <a href="https://shouldibid.ai">ShouldIBid</a>
+      <a href="https://fincline.com">Fincline</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="footer-legal">&copy; 2026 Neomite Labs LLC. All rights reserved.</div>
+  </div>
+</footer>
+
 </body>
 </html>
