@@ -249,9 +249,10 @@
       box-shadow: 0 10px 32px rgba(0,169,157,.12), 0 1px 0 rgba(255,255,255,1) inset;
       transform: translateY(-2px);
     }
-    .belief-icon { font-size: 28px; margin-bottom: 12px; }
-    .belief h3 { font-size: 17px; font-weight: 700; color: #0f172a; margin-bottom: 8px; }
-    .belief p { font-size: 14px; color: #667085; line-height: 1.7; }
+    .belief-icon { margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
+    .belief-icon svg { flex-shrink: 0; }
+    .belief h3 { font-size: 17px; font-weight: 700; color: #0f172a; margin-bottom: 0; line-height: 1.2; }
+    .belief p { font-size: 14px; color: #667085; line-height: 1.7; margin-top: 10px; }
 
     /* CONTACT */
     .contact-section-outer {
@@ -259,25 +260,28 @@
       border-top: 1px solid rgba(0,169,157,.10);
     }
     .contact-section { padding: 80px 32px; max-width: 1100px; margin: 0 auto; }
-    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 32px; }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 32px; }
     .contact-card {
-      border-radius: 18px; padding: 26px;
-      background: rgba(255,255,255,.78);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      border: 1px solid rgba(255,255,255,.92);
+      border-radius: 18px; overflow: hidden;
+      background: rgba(255,255,255,.55);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255,255,255,.80);
       box-shadow: 0 4px 20px rgba(0,169,157,.07), 0 1px 0 rgba(255,255,255,1) inset;
-      transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
-    .contact-card:hover {
-      background: rgba(255,255,255,.92);
-      box-shadow: 0 10px 32px rgba(0,169,157,.10), 0 1px 0 rgba(255,255,255,1) inset;
-      transform: translateY(-2px);
+    .contact-card:hover { transform: translateY(-2px); box-shadow: 0 10px 32px rgba(0,169,157,.12), 0 1px 0 rgba(255,255,255,1) inset; }
+    .contact-card-head {
+      padding: 14px 22px;
+      font-size: 15px; font-weight: 700; color: white; letter-spacing: -0.1px;
+      border-bottom: 1px solid rgba(255,255,255,.22);
     }
-    .contact-card h3 { font-size: 17px; font-weight: 700; color: #0f172a; margin-bottom: 8px; }
-    .contact-card p { font-size: 14px; color: #475569; line-height: 1.7; }
-    .contact-card a { color: var(--teal-dark); font-weight: 600; }
-    .contact-card a:hover { color: var(--violet); }
+    .contact-card-head.teal { background: linear-gradient(135deg, rgba(0,169,157,.78), rgba(117,87,255,.68)); }
+    .contact-card-head.violet { background: linear-gradient(135deg, rgba(117,87,255,.72), rgba(0,169,157,.62)); }
+    .contact-card-body { padding: 16px 22px; }
+    .contact-card-body p { font-size: 14px; color: #475569; line-height: 1.75; }
+    .contact-card-body a { color: var(--teal-dark); font-weight: 600; }
+    .contact-card-body a:hover { color: var(--violet); }
 
     /* FOOTER */
     footer {
@@ -429,18 +433,55 @@
     <p class="section-sub">Small businesses face enterprise-level complexity without enterprise-level systems. Neomite builds focused AI tools that give small teams capabilities previously reserved for large organizations — without IT departments or procurement specialists.</p>
     <div class="beliefs">
       <div class="belief">
-        <div class="belief-icon">🎯</div>
-        <h3>One workflow at a time</h3>
+        <div class="belief-icon">
+          <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+            <defs>
+              <linearGradient id="bi1" x1="0" y1="0" x2="36" y2="36" gradientUnits="userSpaceOnUse"><stop stop-color="#00A99D"/><stop offset="1" stop-color="#7557FF"/></linearGradient>
+            </defs>
+            <rect x="1" y="1" width="34" height="34" rx="10" fill="url(#bi1)"/>
+            <circle cx="18" cy="18" r="4" fill="white"/>
+            <circle cx="18" cy="18" r="8" stroke="white" stroke-width="1.5" fill="none"/>
+            <line x1="18" y1="6" x2="18" y2="9.5" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
+            <line x1="18" y1="26.5" x2="18" y2="30" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
+            <line x1="6" y1="18" x2="9.5" y2="18" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
+            <line x1="26.5" y1="18" x2="30" y2="18" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+          <h3>One workflow at a time</h3>
+        </div>
         <p>Each Neomite product targets a single specific workflow. Focused tools work better than broad platforms for small teams.</p>
       </div>
       <div class="belief">
-        <div class="belief-icon">🤖</div>
-        <h3>AI where it helps</h3>
+        <div class="belief-icon">
+          <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+            <defs>
+              <linearGradient id="bi2" x1="0" y1="0" x2="36" y2="36" gradientUnits="userSpaceOnUse"><stop stop-color="#00A99D"/><stop offset="1" stop-color="#7557FF"/></linearGradient>
+            </defs>
+            <rect x="1" y="1" width="34" height="34" rx="10" fill="url(#bi2)"/>
+            <circle cx="18" cy="18" r="3" fill="white"/>
+            <line x1="18" y1="8" x2="18" y2="12" stroke="white" stroke-width="2" stroke-linecap="round"/>
+            <line x1="18" y1="24" x2="18" y2="28" stroke="white" stroke-width="2" stroke-linecap="round"/>
+            <line x1="8" y1="18" x2="12" y2="18" stroke="white" stroke-width="2" stroke-linecap="round"/>
+            <line x1="24" y1="18" x2="28" y2="18" stroke="white" stroke-width="2" stroke-linecap="round"/>
+            <line x1="11.5" y1="11.5" x2="14.2" y2="14.2" stroke="white" stroke-width="2" stroke-linecap="round"/>
+            <line x1="21.8" y1="21.8" x2="24.5" y2="24.5" stroke="white" stroke-width="2" stroke-linecap="round"/>
+            <line x1="24.5" y1="11.5" x2="21.8" y2="14.2" stroke="white" stroke-width="2" stroke-linecap="round"/>
+            <line x1="14.2" y1="21.8" x2="11.5" y2="24.5" stroke="white" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          <h3>AI where it helps</h3>
+        </div>
         <p>AI should organize information, surface findings, and reduce manual effort — not replace judgment or make decisions.</p>
       </div>
       <div class="belief">
-        <div class="belief-icon">✅</div>
-        <h3>People approve</h3>
+        <div class="belief-icon">
+          <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+            <defs>
+              <linearGradient id="bi3" x1="0" y1="0" x2="36" y2="36" gradientUnits="userSpaceOnUse"><stop stop-color="#00A99D"/><stop offset="1" stop-color="#7557FF"/></linearGradient>
+            </defs>
+            <rect x="1" y="1" width="34" height="34" rx="10" fill="url(#bi3)"/>
+            <path d="M10 19l5.5 5.5L26 13" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          </svg>
+          <h3>People approve</h3>
+        </div>
         <p>Important business decisions stay with the customer. Neomite tools inform and organize. Humans decide.</p>
       </div>
     </div>
@@ -455,27 +496,35 @@
   <p class="section-sub">Questions about our products, billing, partnerships, or press. We're a small team and respond within one business day.</p>
   <div class="contact-grid">
     <div class="contact-card">
-      <h3>General inquiries</h3>
-      <p>Product questions, partnerships, and business inquiries.<br><br>
-      <a href="mailto:hello@shouldibid.ai">hello@shouldibid.ai</a></p>
+      <div class="contact-card-head teal">General inquiries</div>
+      <div class="contact-card-body">
+        <p>Product questions, partnerships, and business inquiries.<br><br>
+        <a href="mailto:hello@shouldibid.ai">hello@shouldibid.ai</a></p>
+      </div>
     </div>
     <div class="contact-card">
-      <h3>Product support</h3>
-      <p>Support for ShouldIBid, Fincline, or billing questions.<br><br>
-      <a href="mailto:hello@shouldibid.ai">hello@shouldibid.ai</a></p>
+      <div class="contact-card-head violet">Product support</div>
+      <div class="contact-card-body">
+        <p>Support for ShouldIBid, Fincline, or billing questions.<br><br>
+        <a href="mailto:hello@shouldibid.ai">hello@shouldibid.ai</a></p>
+      </div>
     </div>
     <div class="contact-card">
-      <h3>Company</h3>
-      <p>Neomite Labs LLC<br>California, United States<br><br>
-      Registered in California &nbsp;·&nbsp; EIN on file</p>
+      <div class="contact-card-head teal">Company</div>
+      <div class="contact-card-body">
+        <p>Neomite Labs LLC<br>California, United States<br><br>
+        Registered in California &nbsp;·&nbsp; EIN on file</p>
+      </div>
     </div>
     <div class="contact-card">
-      <h3>Products</h3>
-      <p>
-        <a href="https://shouldibid.ai">shouldibid.ai</a> — RFP intelligence<br>
-        <a href="https://fincline.com">fincline.com</a> — Payment reconciliation<br>
-        <a href="https://rfp4.com">rfp4.com</a> — ShouldIBid marketing
-      </p>
+      <div class="contact-card-head violet">Products</div>
+      <div class="contact-card-body">
+        <p>
+          <a href="https://shouldibid.ai">shouldibid.ai</a> — RFP intelligence<br>
+          <a href="https://fincline.com">fincline.com</a> — Payment reconciliation<br>
+          <a href="https://rfp4.com">rfp4.com</a> — ShouldIBid marketing
+        </p>
+      </div>
     </div>
   </div>
 </section>
